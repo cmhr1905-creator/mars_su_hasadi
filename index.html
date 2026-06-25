@@ -30,12 +30,13 @@ h1,h2,h3,h4,.disp{font-family:'Chakra Petch','IBM Plex Sans',sans-serif}
 
 /* ============ AÇILIŞ EKRANI ============ */
 #intro{
-  position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center;
+  position:fixed; inset:0; z-index:100; display:flex;
+  overflow-y:auto; -webkit-overflow-scrolling:touch;
   background:radial-gradient(ellipse at 50% 30%, #3a2113 0%, #1a0f08 70%, #0d0805 100%);
   transition:opacity .6s ease; padding:24px;
 }
 #intro.gone{opacity:0; pointer-events:none}
-.intro-card{max-width:680px; text-align:center}
+.intro-card{max-width:680px; text-align:center; margin:auto;}
 .intro-card .eyebrow{color:#ff9a5c; letter-spacing:.25em; font-weight:600; font-size:12px; text-transform:uppercase; margin-bottom:14px; font-family:'Chakra Petch'}
 .intro-card h1{font-size:clamp(30px,5vw,52px); line-height:1.08; color:#fdf3e7; margin-bottom:18px}
 .intro-card h1 em{font-style:normal; color:#ff9a5c}
@@ -195,6 +196,16 @@ table.cmp tr:last-child td{border-bottom:none}
   .panel{border:none; border-bottom:1px solid var(--border); max-height:none; overflow:visible}
   #center{order:-1; height:92vh; flex:none}
   #stage{flex-basis:52%}
+}
+@media (max-width:640px){
+  #intro{padding:18px 16px calc(24px + env(safe-area-inset-bottom))}
+  .intro-card .eyebrow{font-size:11px; margin-bottom:10px}
+  .intro-card h1{font-size:26px; line-height:1.12; margin-bottom:12px}
+  .intro-card p{font-size:14px; line-height:1.55; margin-bottom:18px}
+  .steps{flex-direction:column; gap:8px; margin-bottom:20px}
+  .step{min-width:0; width:100%}
+  .step-arrow{transform:rotate(90deg)}
+  #startBtn{width:100%; padding:16px}
 }
 </style>
 </head>
