@@ -132,6 +132,12 @@ html,body{height:100%; overflow:hidden}
 #themeBtn{position:absolute; right:12px; top:86px; z-index:6; pointer-events:auto; width:38px; height:38px;
   border-radius:50%; border:1px solid var(--border); background:color-mix(in srgb, var(--panel) 88%, transparent);
   color:var(--text); cursor:pointer; font-size:17px; backdrop-filter:blur(6px); box-shadow:var(--shadow)}
+#fsBtn{position:absolute; right:12px; top:132px; z-index:7; pointer-events:auto; width:38px; height:38px;
+  border-radius:50%; border:1px solid var(--border); background:color-mix(in srgb, var(--panel) 88%, transparent);
+  color:var(--text); cursor:pointer; font-size:19px; line-height:1; backdrop-filter:blur(6px); box-shadow:var(--shadow)}
+#fsBtn:hover{border-color:var(--tur)}
+#stage.fs{position:fixed; inset:0; z-index:9998; width:100vw; height:100vh; height:100dvh; flex:none}
+body.fslock{overflow:hidden}
 
 /* zaman kontrolleri */
 #timeBar{position:absolute; left:50%; bottom:12px; transform:translateX(-50%); z-index:6; pointer-events:auto;
@@ -290,6 +296,7 @@ window.addEventListener('error',function(e){
         <div><span style="display:inline-block;width:11px;height:3px;background:#49d17a;vertical-align:middle;margin-right:6px"></span>Toplanan su</div>
       </div>
       <button id="themeBtn" title="Açık / koyu tema">☀️</button>
+      <button id="fsBtn" title="Tam ekran" aria-label="Tam ekran">⛶</button>
       <button id="orbitBtn"><span class="ic">⟳</span><span id="orbitTxt">Döndür: Kapalı</span></button>
       <div id="timeBar">
         <button id="backBtn" title="1 saat geri">⏮</button>
@@ -1381,6 +1388,31 @@ document.querySelectorAll('.sl').forEach(el=>{const h=el.querySelector('.hint');
 addEventListener('resize',resize);
 let _roQ=false;
 new ResizeObserver(()=>{ if(_roQ)return; _roQ=true; requestAnimationFrame(()=>{_roQ=false; resize();}); }).observe(stage);
+
+/* ---- tam ekran (3D) — gerçek API + iOS için CSS yedeği ---- */
+(function(){
+  const fsBtn=$('fsBtn');
+  const nativeOn=()=>document.fullscreenElement===stage||document.webkitFullscreenElement===stage;
+  const isFs=()=>stage.classList.contains('fs')||nativeOn();
+  function refit(){ _rw=_rh=0; resize(); }
+  function sync(){ const on=isFs(); fsBtn.textContent=on?'✕':'⛶'; fsBtn.title=on?'Tam ekrandan çık':'Tam ekran'; document.body.classList.toggle('fslock',on); refit(); }
+  function enter(){
+    stage.classList.add('fs');
+    const req=stage.requestFullscreen||stage.webkitRequestFullscreen;
+    if(req){ try{ Promise.resolve(req.call(stage)).catch(()=>{}); }catch(e){} }
+    requestAnimationFrame(sync);
+  }
+  function exit(){
+    stage.classList.remove('fs');
+    if(nativeOn()){ const ex=document.exitFullscreen||document.webkitExitFullscreen; if(ex){ try{ Promise.resolve(ex.call(document)).catch(()=>{}); }catch(e){} } }
+    requestAnimationFrame(sync);
+  }
+  function toggle(){ isFs()?exit():enter(); }
+  fsBtn.addEventListener('click',toggle);
+  fsBtn.addEventListener('touchend',e=>{ e.preventDefault(); toggle(); },{passive:false});
+  ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ if(!nativeOn()) stage.classList.remove('fs'); sync(); }));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&stage.classList.contains('fs')&&!nativeOn()) exit(); });
+})();
 
 let lastT=performance.now();
 function loop(now){
