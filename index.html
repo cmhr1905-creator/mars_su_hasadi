@@ -94,9 +94,9 @@ html,body{height:100%; overflow:hidden}
 
 /* ============ ORTA ============ */
 #center{display:flex; flex-direction:column; min-width:0; background:var(--bg2)}
-#stage{position:relative; flex:0 0 52%; min-height:0; overflow:hidden}
+#stage{position:relative; flex:0 0 60%; min-height:0; overflow:hidden}
 #stage canvas{display:block; outline:none; width:100% !important; height:100% !important}
-#chartWrap{flex:1 1 48%; min-height:0; display:flex; flex-direction:column; border-top:1px solid var(--border); padding:7px 12px 5px; background:var(--panel)}
+#chartWrap{flex:1 1 40%; min-height:0; display:flex; flex-direction:column; border-top:1px solid var(--border); padding:7px 12px 5px; background:var(--panel)}
 #chartTitle{font-family:'Chakra Petch'; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text2); margin-bottom:4px}
 #chart{flex:1; min-height:0; width:100%}
 #legend{display:flex; flex-wrap:wrap; gap:3px 14px; padding-top:4px; font-size:10px; color:var(--text2)}
@@ -176,6 +176,116 @@ table.cmp td{padding:1px 5px; line-height:1.25; border-bottom:1px dashed var(--b
 table.cmp td:first-child{text-align:left; color:var(--text2)}
 table.cmp tr:last-child td{border-bottom:none}
 .distil{font-size:9px; line-height:1.3; color:var(--yes); background:color-mix(in srgb, var(--yes) 10%, var(--panel2)); border:1px dashed color-mix(in srgb, var(--yes) 40%, var(--border)); border-radius:7px; padding:5px 8px; margin-top:5px;}
+.marsnotes{background:color-mix(in srgb, var(--tur) 8%, var(--panel2)); border:1px solid color-mix(in srgb, var(--tur) 30%, var(--border)); border-radius:10px; padding:8px 10px; margin-bottom:12px}
+.marsnotes .mn-h{font-size:10.5px; font-weight:700; letter-spacing:.03em; color:var(--tur2); margin-bottom:5px}
+.marsnotes ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px}
+.marsnotes li{font-size:9.5px; line-height:1.4; color:var(--muted); padding-left:13px; position:relative}
+.marsnotes li::before{content:'✓'; position:absolute; left:0; color:var(--yes); font-weight:700}
+#juryPanel{position:fixed; inset:0; z-index:500; display:none; background:rgba(8,5,3,.72); backdrop-filter:blur(4px)}
+#juryPanel.open{display:flex; align-items:center; justify-content:center; padding:20px}
+.jp-wrap{width:min(760px,100%); max-height:88vh; display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--border); border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.5); overflow:hidden}
+.jp-head{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--border); background:color-mix(in srgb, var(--tur) 8%, var(--panel))}
+.jp-title{font-weight:700; font-size:15px}
+#juryClose{width:32px; height:32px; border-radius:50%; border:1px solid var(--border); background:var(--panel2); color:var(--text); font-size:15px; cursor:pointer}
+.jp-body{overflow-y:auto; padding:16px 20px 24px; -webkit-overflow-scrolling:touch}
+.jp-body section{margin-bottom:16px}
+.jp-body h3{font-size:12.5px; letter-spacing:.03em; color:var(--tur2); margin:0 0 5px; text-transform:uppercase}
+.jp-body p{font-size:12.5px; line-height:1.6; color:var(--text); margin:0}
+.jp-body code{background:var(--panel2); border:1px solid var(--border); border-radius:5px; padding:1px 5px; font-size:11px}
+@media (max-width:640px){ .jp-wrap{max-height:92vh; border-radius:12px} .jp-body{padding:12px 14px 20px} }
+
+/* ===== TEKNOFEST UI/UX REVİZYON — v3 ===== */
+
+/* --- üst kahraman şeridi --- */
+#app{grid-template-rows:auto 1fr}
+#topStrip{grid-column:1/-1; order:-2; display:flex; gap:8px; padding:8px 12px; background:var(--panel);
+  border-bottom:1px solid var(--border); overflow-x:auto}
+.hero{flex:1 1 0; min-width:112px; background:var(--panel2); border:1px solid var(--border); border-radius:12px;
+  padding:8px 12px; display:flex; flex-direction:column; gap:2px}
+.hero .hi{font-size:9.5px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; display:flex; align-items:center; gap:5px}
+.hero .hv{font-family:'Chakra Petch'; font-weight:700; font-size:18px; line-height:1.15; font-variant-numeric:tabular-nums}
+.hero .hs{font-size:9.5px; color:var(--text2)}
+.hero.su{border-color:color-mix(in srgb, var(--mav) 40%, var(--border))}
+.hero.su .hv{color:var(--mav)}
+.hero.en{border-color:color-mix(in srgb, var(--tur) 40%, var(--border))}
+.hero.en .hv{color:var(--tur2)}
+.hero.sis .hv{color:var(--yes); font-size:14px}
+.hero.sis.stop .hv{color:var(--kir)}
+@media (max-width:1100px){ #topStrip{order:-3} }
+@media (max-width:640px){ #topStrip{flex-wrap:wrap} .hero{flex:1 1 44%; min-width:0} }
+
+/* --- akordiyon (sol panel) --- */
+details.acc{border:1px solid var(--border); border-radius:10px; margin-bottom:7px; background:var(--panel2); overflow:hidden}
+details.acc summary{list-style:none; cursor:pointer; padding:8px 10px; display:flex; align-items:center; gap:7px;
+  font-family:'Chakra Petch'; font-size:11.5px; font-weight:700; letter-spacing:.05em; color:var(--text); user-select:none}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::before{content:'▸'; color:var(--tur2); font-size:10px; transition:transform .18s ease}
+details.acc[open] summary::before{transform:rotate(90deg)}
+details.acc summary .accn{margin-left:auto; font-size:9px; color:var(--muted); font-weight:400; letter-spacing:0}
+details.acc .accbody{padding:2px 10px 10px}
+.tier{font-size:9px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin:8px 0 3px; display:flex; align-items:center; gap:6px}
+.tier::after{content:''; flex:1; height:1px; background:var(--border)}
+.tier:first-child{margin-top:2px}
+
+/* --- "Şu An Ne Oluyor" süreç akışı --- */
+.flow{display:flex; flex-direction:column; gap:0}
+.fstep{display:flex; align-items:center; gap:8px; padding:5px 2px; opacity:.4; transition:opacity .3s ease}
+.fstep.on{opacity:1}
+.fstep.done{opacity:.75}
+.fnum{width:20px; height:20px; flex:none; border-radius:50%; display:grid; place-items:center; font-size:10px; font-weight:700;
+  background:var(--panel2); border:1px solid var(--border); color:var(--text2); transition:all .3s ease}
+.fstep.on .fnum{background:var(--tur); border-color:var(--tur); color:#1a0f08; box-shadow:0 0 10px color-mix(in srgb, var(--tur) 60%, transparent)}
+.fstep.done .fnum{background:var(--yes); border-color:var(--yes); color:#0d1f14}
+.fstep .ftxt{font-size:11px; color:var(--text2)}
+.fstep.on .ftxt{color:var(--text); font-weight:600}
+.fstep.done .ftxt{color:var(--text2)}
+.farrow{width:20px; text-align:center; font-size:9px; color:var(--border); margin:-1px 0}
+.fstep.done + .farrow{color:var(--yes)}
+
+/* --- İç / Dış ünite ikiz kartlar --- */
+.twin{display:flex; flex-direction:column; gap:6px; align-items:stretch}
+.tcard{background:var(--panel2); border:1px solid var(--border); border-radius:10px; padding:9px 11px}
+.tcard.iic{border-left:3px solid var(--yes)}
+.tcard.dis{border-left:3px solid var(--tur2)}
+.tcard .th{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px}
+.tcard .tn{font-family:'Chakra Petch'; font-weight:700; font-size:11.5px}
+.tcard.iic .tn{color:var(--yes)}
+.tcard.dis .tn{color:var(--tur2)}
+.tcard .tt{font-size:9px; color:var(--muted); letter-spacing:.05em}
+.tcard .trow{display:flex; justify-content:space-between; font-size:10.5px; color:var(--text2); padding:1.5px 0}
+.tcard .trow b{color:var(--text); font-variant-numeric:tabular-nums}
+.tmid{text-align:center; font-size:9px; color:var(--muted); letter-spacing:.1em; padding:1px 0}
+.tsum{background:color-mix(in srgb, var(--mav) 10%, var(--panel2)); border:1px dashed color-mix(in srgb, var(--mav) 40%, var(--border));
+  border-radius:10px; padding:8px 11px; text-align:center}
+.tsum .tsn{font-size:9px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase}
+.tsum .tsv{font-family:'Chakra Petch'; font-weight:700; font-size:16px; color:var(--mav)}
+
+/* --- grafik sekmeleri --- */
+.ctabs{display:flex; gap:4px; margin-bottom:4px}
+.ctab{flex:1; padding:5px 4px; border-radius:7px; border:1px solid var(--border); background:var(--panel2); color:var(--text2);
+  font-size:10px; cursor:pointer; transition:all .15s ease; text-align:center}
+.ctab .cdot{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--muted); margin-right:4px; vertical-align:middle}
+.ctab.active{border-color:var(--tur); background:color-mix(in srgb, var(--tur) 14%, var(--panel2)); color:var(--text); font-weight:600}
+.ctab.active .cdot{background:var(--tur)}
+
+/* --- Sunum Modu / Mühendis Modu --- */
+#modeBtn{width:100%; margin-bottom:8px; padding:8px 10px; border-radius:10px; border:1px solid var(--border);
+  background:var(--panel2); color:var(--text); font-size:11.5px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px}
+body.sunum .sunum-hide{display:none !important}
+body.sunum #topStrip .hero:not(.su):not(.scn){display:none}
+body.sunum #chartWrap{display:none}
+body.sunum #stage{flex-basis:100%}
+
+/* --- yeniden tasarlanmış senaryo kartları --- */
+.scen{display:flex; align-items:center; gap:9px; transform:scale(1); transition:transform .25s ease, box-shadow .25s ease, border-color .15s ease, background .15s ease}
+.scen .sic{font-size:19px; flex:none; width:24px; text-align:center; filter:drop-shadow(0 0 3px currentColor)}
+.scen .stx{min-width:0; flex:1}
+.scen .sn{font-weight:600; font-size:11.5px}
+.scen .sd{display:block !important; color:var(--text2); font-size:9.5px; line-height:1.3; margin-top:1px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.scen.active{transform:scale(1.045); box-shadow:0 0 0 1px var(--tur), 0 8px 22px color-mix(in srgb, var(--tur) 40%, transparent);
+  background:linear-gradient(90deg, color-mix(in srgb, var(--tur) 16%, var(--panel2)), var(--panel2));}
+
 
 .annual{background:var(--panel2); border:1px solid var(--border); border-radius:7px; padding:4px 8px; margin-bottom:4px}
 .annual .ah{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:3px}
@@ -201,7 +311,7 @@ table.cmp tr:last-child td{border-bottom:none}
   #app{display:flex; flex-direction:column; height:auto}
   .panel{border:none; border-bottom:1px solid var(--border); max-height:none; overflow:visible}
   #center{order:-1; height:92vh; flex:none}
-  #stage{flex-basis:52%}
+  #stage{flex-basis:58%}
 }
 @media (max-width:640px){
   #intro{padding:18px 16px calc(24px + env(safe-area-inset-bottom))}
@@ -343,7 +453,7 @@ window.addEventListener('error',function(e){
 <div id="boot">
   <div class="boot-box">
     <div class="boot-badge">◊</div>
-    <div class="boot-team">MARS SAKİNLERİ <span>· MISSION CONTROL</span></div>
+    <div class="boot-team">MARS SAKİNLERİ <span>· GÖREV KONTROL</span></div>
     <div id="bootLog"></div>
     <div class="boot-bar"><i id="bootFill"></i></div>
     <div class="boot-skip">dokun / tıkla → atla</div>
@@ -379,10 +489,10 @@ window.addEventListener('error',function(e){
       <div class="mc-card">
         <div class="mc-h">◇ SİMÜLASYONUN AMACI</div>
         <ol class="purpose">
-          <li>Mars toprağındaki donmuş su önce <b>ısıtılır.</b></li>
-          <li>Oluşan su buharı soğuk <b>bakır yüzeylerde yoğuşturulur.</b></li>
-          <li>Yoğuşan damlalar <b>oluk sistemiyle toplanır.</b></li>
-          <li>İç ünitedeki <b>atık ısı</b>, ısı bacasıyla dış üniteye aktarılıp <b>yeniden kullanılır.</b></li>
+          <li>Güneş <b>regoliti</b> ısıtır; düşük atmosfer basıncı nedeniyle buz <b>doğrudan süblimleşerek</b> su buharına dönüşür.</li>
+          <li>Su buharı soğuk <b>bakır levhalarda</b> önce <b>kırağı</b> olarak birikir.</li>
+          <li>Kırağı periyodik olarak erir; damlalar <b>oluk sistemiyle</b> toplanır.</li>
+          <li>İç ünitedeki <b>atık ısı</b>, ısı transfer bacasıyla dış üniteye aktarılıp <b>yeniden kullanılır.</b></li>
           <li>Tüm süreç <b>Dijital İkiz</b> ile gerçek zamanlı analiz edilir.</li>
         </ol>
       </div>
@@ -390,7 +500,7 @@ window.addEventListener('error',function(e){
         <div class="mc-h">◇ KAPALI DÖNGÜ SÜRECİ</div>
         <div class="proc">
           <div class="proc-row">
-            <span class="pill">REGOLİT</span><i>→</i><span class="pill">ISITMA</span><i>→</i><span class="pill">BUHARLAŞMA</span><i>→</i><span class="pill">YOĞUŞMA</span><i>→</i><span class="pill">SU HASADI</span><i>→</i><span class="pill">TOPLAMA</span>
+            <span class="pill">REGOLİT</span><i>→</i><span class="pill">SÜBLİMLEŞME</span><i>→</i><span class="pill">SU BUHARI</span><i>→</i><span class="pill">KIRAĞI</span><i>→</i><span class="pill">ERİTME</span><i>→</i><span class="pill">OLUK</span><i>→</i><span class="pill">SU KABI</span>
           </div>
           <div class="proc-link">⇣ atık ısı geri kazanımı ⇣</div>
           <div class="proc-row alt">
@@ -423,7 +533,7 @@ window.addEventListener('error',function(e){
 (function(){
   var log=document.getElementById('bootLog'), fill=document.getElementById('bootFill'), boot=document.getElementById('boot');
   if(!boot||!log) return;
-  var lines=[['Mission Control',0],['Connecting...',0],['Mars Environment Loaded',1],['Digital Twin Ready',1],['Physical Prototype Linked',1],['Mission Ready',1]];
+  var lines=[['Görev Kontrol',0],['Bağlanılıyor...',0],['Mars Ortamı Yüklendi',1],['Dijital İkiz Hazır',1],['Fiziksel Prototip Bağlandı',1],['Görev Hazır',1]];
   var i=0, ended=false;
   function done(){ if(ended)return; ended=true; boot.classList.add('gone'); setTimeout(function(){ boot.style.display='none'; },650); }
   function step(){
@@ -442,7 +552,62 @@ window.addEventListener('error',function(e){
 })();
 </script>
 
+<!-- ============ JÜRİ MODU — BİLİMSEL AÇIKLAMALAR ============ -->
+<div id="juryPanel">
+  <div class="jp-wrap">
+    <div class="jp-head">
+      <div class="jp-title">🎓 Bilimsel Açıklamalar</div>
+      <button id="juryClose" aria-label="Kapat">✕</button>
+    </div>
+    <div class="jp-body">
+
+      <section><h3>1 · ISRU nedir?</h3>
+        <p>ISRU (In Situ Resource Utilization / Yerinde Kaynak Kullanımı), Dünya'dan taşımak yerine gidilen gök cisminin kendi kaynaklarından (burada: regolitteki buz ve hidratlı mineraller) faydalı ürün — su — üretme yaklaşımıdır. Bu simülasyon iki paralel ISRU yöntemini karşılaştırır: içeride aktif Peltier ile zorlanmış yoğuşma, çatıda Mars'ın kendi soğuğuyla pasif yoğuşma.</p></section>
+
+      <section><h3>2 · Mars atmosferi ve neden önemli</h3>
+        <p>Mars yüzey basıncı ortalama ~0,6 kPa'dır (Dünya'nın ~%0,6'sı), simülasyonda 0,3–1,15 kPa aralığında (yükseltiye/mevsime göre) ayarlanabilir. Bu kadar ince bir atmosferde <b>doğal konveksiyon neredeyse yoktur</b>; ısı büyük ölçüde <b>iletim</b> (bakır levha, ısı transfer bacası) ve <b>radyasyonla</b> (gökyüzüne ışıma) taşınır. Kod içinde bu, dış ünitenin levha sıcaklığının güneş ışınımına bağlı bir "gökyüzü ışıması" terimiyle (sky=6+11·(1−güneş oranı)) hesaplanmasına yansır — konveksiyon terimi kasıtlı olarak yoktur.</p></section>
+
+      <section><h3>3 · Süblimleşme</h3>
+        <p>Düşük basınç nedeniyle buz, sıvı fazdan geçmeden doğrudan buhara dönüşür (süblimleşme). Model: <code>süblimleşme = EVAP_K · nem_oranı · sıcaklık_faktörü · basınç_faktörü · oda_faktörü</code>. Basınç faktörü <code>√(1,15/basınç)</code> olarak Mars'ın kendi basınç aralığına göre normalize edilmiştir (1,0–2,4 arası) — yani "Fanus iç basıncı" düşürüldükçe süblimleşme gözle görülür şekilde kolaylaşır.</p></section>
+
+      <section><h3>4 · Çiy noktası ve yoğuşma</h3>
+        <p>Çiy noktası, Magnus formülüyle hesaplanır: <code>a·T/(b+T) = ln(RH/100) + a·T/(b+T)</code> biçiminde çözülür (a,b sıcaklığa göre iki farklı sabit seti — su/buz için). Levha sıcaklığı çiy noktasının altına indiğinde mutlak nem farkı üzerinden yoğuşma hızı hesaplanır: <code>hız = k·(nem_ah − nem_ah,levha)</code>. k (yoğuşma iletkenliği), bakır çatı açısının ~45°'ye ne kadar yakın olduğuna bağlı bir çarpanla ölçeklenir.</p></section>
+
+      <section><h3>5 · Kırağı → periyodik eritme</h3>
+        <p>Levha 0 °C'nin altındaysa yoğuşan su sıvı değil <b>kırağı (frost)</b> olarak birikir. Belirli bir süre (≥2 saat) veya belirli bir kırağı kütlesi (&gt;8 g) birikince sistem "eritme" moduna geçer, kırağı oluğa akar. Bu, gerçek pasif su hasadı sistemlerinin çalışma biçimidir; sürekli sıvı akışı değil, periyodik döngüler halinde su toplanır.</p></section>
+
+      <section><h3>6 · Peltier mantığı ve Mars'a bağlı verim</h3>
+        <p>İç ünitedeki Peltier modülünün <b>soğuk tarafı</b> habitat havasını soğutur; <b>sıcak tarafı</b> ise bir bakır ısı transfer bacasıyla dış (Mars) ortamına atılır. Mars atmosferi ne kadar incelirse, sıcak taraftaki ısı atımı o kadar zorlaşır. Bu, ısı atım verimi <code>rej = 0,42 + 0,58·√(basınç/1,15)</code> ile modellenmiştir: düşük atmosfer basıncında rej düşer → hedef ΔT'ye ulaşmak zorlaşır (soğuk yüzey daha az soğur) ve aynı soğutma gücü için enerji tüketimi <code>1/rej</code> oranında artar. COP da aynı çarpanla ölçeklenir. Yani Peltier'in performansı sabit değildir; Mars atmosfer koşuluna göre gerçek zamanlı değişir.</p></section>
+
+      <section><h3>7 · Isı transfer bacası (chimney)</h3>
+        <p>İç ünitenin Peltier atık ısısı, verimi kullanıcı tarafından ayarlanabilen (%30–95) bir bakır ısı transfer bacasıyla çatıdaki dış üniteye taşınır: <code>atık_ısı_boost = (Peltier_gücü%) × baca_verimi</code>. Bu değer dış ünitenin regolit sıcaklığını yükseltir — enerjinin israf edilmeden yeniden kullanıldığı kapalı döngünün temelidir.</p></section>
+
+      <section><h3>8 · Cam yalıtımı — gerçek ödünleşim</h3>
+        <p>Cam kalınlığı artırıldığında iki zıt etki oluşur: (a) ısı içeride daha iyi <b>tutulur</b> (retain ↑, 0,55→1,0), (b) güneş ışığı daha az <b>geçer</b> (transmit ↓, 1,25→0,55). Bu, tek yönlü "kalın cam = daha iyi" varsayımını ortadan kaldırır; kullanıcı optimum kalınlığı deneyerek bulmalıdır.</p></section>
+
+      <section><h3>9 · Bakır çatı açısı</h3>
+        <p>Açı, hem yoğuşma yüzeyinin etkinliğini (k katsayısı) hem de oluk akış verimini etkiler. Model, ~45°'de en yüksek verimi veren bir çan eğrisi kullanır: <code>açı_faktörü = 1 − ((açı−45)/45)² · 0,32</code>, 45°'den uzaklaştıkça verim kademeli azalır.</p></section>
+
+      <section><h3>10 · Toprak nemi ve sondaj</h3>
+        <p>Toprak nemi, regolit içerisindeki buz ve hidratlı minerallerden elde edilebilecek su oranıdır. Gerçekçi Mars değerleri %0–6 aralığındadır; özel su-zengin bölgelerde (ör. Utopia Planitia) %8–10'a çıkabilir. Bir sondaj/değişim işleminde çıkarılan regolit kütlesi sabittir (3000 g); su verimi <code>kütle × nem%</code> formülüyle hesaplanır. Nem tükendikçe (eşik veya sabit aralıkla) sistem otomatik olarak yeni, daha nemli regolitle beslenir.</p></section>
+
+      <section><h3>11 · Varsayımlar ve sınırlamalar</h3>
+        <p>Model iki sistemi de "iyi karışmış kontrol hacmi" olarak basitleştirir (mekânsal sıcaklık/nem gradyanları yok sayılır). Rüzgâr, toz fırtınaları ve mevsimsel CO₂ döngüsünün basınca etkisi yalnızca senaryo bazında (ör. Mars Kışı) temsil edilir, sürekli dinamik değildir. Fiziksel prototip, bu dijital ikizin öngörülerini Dünya koşullarında deneysel olarak doğrulamak için geliştirilmiştir.</p></section>
+
+    </div>
+  </div>
+</div>
+
 <div id="app">
+  <!-- ÜST ŞERİT — 5 saniyede anlaşılır özet -->
+  <div id="topStrip">
+    <div class="hero su"><div class="hi">💧 Toplam Su</div><div class="hv" id="hTotal">0 ml</div><div class="hs" id="hTotalSub">İç 0 · Dış 0</div></div>
+    <div class="hero en"><div class="hi">⚡ Enerji Verimi</div><div class="hv" id="hEff">– ml/kWh</div><div class="hs">İç ünite</div></div>
+    <div class="hero scn"><div class="hi">🪐 Senaryo</div><div class="hv" id="hScen" style="font-size:13px">Mars Standart</div><div class="hs" id="hScenSub">Standart Mars günü</div></div>
+    <div class="hero"><div class="hi">⏱ Zaman</div><div class="hv" id="hClock" style="font-size:14px">Gün 1 · 00:00</div><div class="hs">simülasyon saati</div></div>
+    <div class="hero sis" id="hSys"><div class="hi">▶ Sistem</div><div class="hv" id="hSysV">Duraklatıldı</div><div class="hs">oynat/duraklat ile kontrol</div></div>
+  </div>
+
   <!-- SOL PANEL -->
   <aside class="panel left">
     <div class="app-title">
@@ -450,26 +615,60 @@ window.addEventListener('error',function(e){
       <h1>Mars Su Hasadı<small>İkiz sistem simülasyonu</small></h1>
     </div>
 
-    <div class="sec-h">Senaryolar</div>
-    <div id="scenList"></div>
+    <button id="modeBtn">🎓 Sunum Modu</button>
+    <button id="juryBtn" class="sunum-hide" style="width:100%; margin-bottom:10px; padding:9px 10px; border-radius:10px; border:1px solid var(--border); background:color-mix(in srgb, var(--tur) 14%, var(--panel)); color:var(--text); font-size:12px; font-weight:600; cursor:pointer">🎓 Bilimsel Açıklamalar (Jüri Modu)</button>
 
-    <div class="sec-h">Dış Ortam (Çatı / Mars)</div>
-    <div class="sl"><label>Dış sıcaklık <b id="v_tOut"></b></label><input type="range" id="s_tOut" min="-125" max="30" step="1"><div class="hint">Fanusun dışındaki hava sıcaklığı.</div></div>
-    <div class="sl"><label>Atmosfer basıncı <b id="v_pOut"></b></label><input type="range" id="s_pOut" min="0.3" max="101" step="0.1"><div class="hint">Mars'ta ~0,7 kPa; Dünya'da 101 kPa.</div></div>
-    <div class="sl"><label>Güneş ışınımı (öğle) <b id="v_sol"></b></label><input type="range" id="s_sol" min="0" max="700" step="10"><div class="hint">Gün içinde doğal olarak artıp azalır.</div></div>
-    <div class="sl"><label>Toprak nemi <b id="v_soil"></b></label><input type="range" id="s_soil" min="0" max="50" step="1"><div class="hint">Regolitteki buz ve bağlı su oranı. Isıtıldıkça azalır.</div></div>
+    <div class="marsnotes sunum-hide">
+      <div class="mn-h">🪐 Mars Fizik Notları</div>
+      <ul>
+        <li>Atmosfer çok incedir (~0,4–1,15 kPa).</li>
+        <li>Konveksiyon ihmal edilebilir düzeydedir.</li>
+        <li>Isı çoğunlukla iletim ve radyasyonla taşınır.</li>
+        <li>Su önce süblimleşir (buz → doğrudan buhar).</li>
+        <li>Soğuk levhada önce kırağı oluşur.</li>
+        <li>Peltier verimi sıcak taraftaki ısı atımına bağlıdır.</li>
+      </ul>
+    </div>
 
-    <div class="sec-h">Cihaz Ayarları</div>
-    <div class="sl"><label>Peltier gücü (iç ünite) <b id="v_pel"></b></label><input type="range" id="s_pel" min="10" max="100" step="1"><div class="hint">4 × TEC1-12706, toplam ~288 W. Yalnız iç üniteyi soğutur; atık ısısı bacayla çatıdaki dış üniteye gider.</div></div>
-    <div class="sl"><label>Bakır çatı açısı <b id="v_ang"></b></label><input type="range" id="s_ang" min="10" max="70" step="1"><div class="hint">Damlaların oluğa akma eğimi.</div></div>
-    <div class="sl"><label>Cam yalıtım kalınlığı <b id="v_ins"></b></label><input type="range" id="s_ins" min="0.5" max="2" step="0.05"><div class="hint">Kalın cam, sera ısısını içeride daha iyi tutar.</div></div>
-    <div class="sl"><label>Fanus iç basıncı <b id="v_pin"></b></label><input type="range" id="s_pin" min="0.3" max="101" step="0.1"><div class="hint">Düşük basınçta buz daha kolay süblimleşir (doğrudan buhara geçer).</div></div>
+    <details class="acc" open>
+      <summary>Senaryolar <span class="accn" id="scenAccn"></span></summary>
+      <div class="accbody"><div id="scenList"></div></div>
+    </details>
 
-    <div class="sec-h">Toprak Takviyesi (Sondaj)</div>
-    <div class="sl"><label>Otomatik toprak değişimi <b id="v_refill"></b></label><input type="range" id="s_refill" min="0" max="1" step="1" value="1"><div class="hint">Derin buzlu regolitten sondajla taze nemli toprak alınır; nemi tükenen toprak değiştirilir. Sondaj enerjisi üssün güneş panellerinden karşılanır.</div></div>
-    <div class="sl"><label>Tetikleme modu <b id="v_rmode"></b></label><input type="range" id="s_rmode" min="0" max="1" step="1" value="0"><div class="hint">Eşik: nem azalınca otomatik · Aralık: sabit saat aralığıyla.</div></div>
-    <div class="sl" id="wrap_thr"><label>Değişim eşiği <b id="v_thr"></b></label><input type="range" id="s_thr" min="10" max="60" step="5" value="25"><div class="hint">Toprak nemi bu oranın altına düşünce değişim yapılır.</div></div>
-    <div class="sl" id="wrap_int"><label>Değişim aralığı <b id="v_int"></b></label><input type="range" id="s_int" min="2" max="24" step="1" value="8"><div class="hint">Sabit zaman aralığıyla toprak değişimi.</div></div>
+    <details class="acc sunum-hide">
+      <summary>Mars Ortamı</summary>
+      <div class="accbody">
+        <div class="tier">Temel</div>
+        <div class="sl"><label>Dış sıcaklık <b id="v_tOut"></b></label><input type="range" id="s_tOut" min="-125" max="30" step="1"><div class="hint">Fanusun dışındaki hava sıcaklığı.</div></div>
+        <div class="sl"><label>Atmosfer basıncı <b id="v_pOut"></b></label><input type="range" id="s_pOut" min="0.3" max="1.15" step="0.01"><div class="hint">Mars yüzey atmosfer basıncını temsil eder (~0,4–1,15 kPa, yüksekliğe göre değişir).</div></div>
+        <div class="sl"><label>Güneş ışınımı (öğle) <b id="v_sol"></b></label><input type="range" id="s_sol" min="0" max="700" step="10"><div class="hint">Gün içinde doğal olarak artıp azalır.</div></div>
+        <div class="sl"><label>Toprak nemi <b id="v_soil"></b></label><input type="range" id="s_soil" min="0" max="10" step="0.5"><div class="hint">Regolit içerisindeki buz ve hidratlı minerallerden elde edilebilecek su oranı. Gerçekçi aralık %0–6; özel bölgelerde %8–10.</div></div>
+      </div>
+    </details>
+
+    <details class="acc sunum-hide">
+      <summary>Cihaz Ayarları</summary>
+      <div class="accbody">
+        <div class="tier">Gelişmiş</div>
+        <div class="sl"><label>Peltier gücü (iç ünite) <b id="v_pel"></b></label><input type="range" id="s_pel" min="10" max="100" step="1"><div class="hint">4 × TEC1-12706, toplam ~288 W. Yalnız iç üniteyi soğutur; atık ısısı bacayla çatıdaki dış üniteye gider. Sıcak taraf ısı atımı Mars basıncına bağlı olduğundan COP sabit değildir.</div></div>
+        <div class="sl"><label>Bakır çatı açısı <b id="v_ang"></b></label><input type="range" id="s_ang" min="10" max="70" step="1"><div class="hint">Yoğuşma yüzeyini ve oluk akış verimini etkiler. Optimum açı ~45°.</div></div>
+        <div class="sl"><label>Cam yalıtım kalınlığı <b id="v_ins"></b></label><input type="range" id="s_ins" min="0.5" max="2" step="0.05"><div class="hint">Kalın cam ısıyı içeride daha iyi tutar, ama güneş geçirgenliğini azaltır — gerçek bir ödünleşim.</div></div>
+        <div class="sl"><label>Isı transfer bacası verimi <b id="v_chim"></b></label><input type="range" id="s_chim" min="0.3" max="0.95" step="0.01"><div class="hint">İç ünitenin Peltier atık ısısının bakır baca ile dış üniteye ne kadarının aktarıldığı.</div></div>
+        <div class="sl"><label>Fanus iç basıncı <b id="v_pin"></b></label><input type="range" id="s_pin" min="0.3" max="1.15" step="0.01"><div class="hint">Bu değer Mars yüzey atmosfer basıncını temsil eder. Düşük basınçta buz daha kolay süblimleşir (doğrudan buhara geçer).</div></div>
+      </div>
+    </details>
+
+    <details class="acc sunum-hide">
+      <summary>Toprak Takviyesi</summary>
+      <div class="accbody">
+        <div class="tier">Uzman — Sondaj</div>
+        <div class="sl"><label>Otomatik toprak değişimi <b id="v_refill"></b></label><input type="range" id="s_refill" min="0" max="1" step="1" value="1"><div class="hint">Derin buzlu regolitten sondajla taze nemli toprak alınır; nemi tükenen toprak değiştirilir. Sondaj enerjisi üssün güneş panellerinden karşılanır.</div></div>
+        <div class="sl"><label>Tetikleme modu <b id="v_rmode"></b></label><input type="range" id="s_rmode" min="0" max="1" step="1" value="0"><div class="hint">Eşik: nem azalınca otomatik · Aralık: sabit saat aralığıyla.</div></div>
+        <div class="sl" id="wrap_thr"><label>Değişim eşiği <b id="v_thr"></b></label><input type="range" id="s_thr" min="10" max="60" step="5" value="25"><div class="hint">Toprak nemi bu oranın altına düşünce değişim yapılır.</div></div>
+        <div class="sl" id="wrap_int"><label>Değişim aralığı <b id="v_int"></b></label><input type="range" id="s_int" min="2" max="24" step="1" value="8"><div class="hint">Sabit zaman aralığıyla toprak değişimi.</div></div>
+        <div class="distil" id="sondajCalc" style="margin-top:2px">⛏ hesaplanıyor…</div>
+      </div>
+    </details>
   </aside>
 
   <!-- ORTA -->
@@ -481,8 +680,8 @@ window.addEventListener('error',function(e){
         <div class="row"><span class="k">Dış Ünite</span><span class="v vA" id="totA">0 <small>ml</small></span></div>
         <div class="sub"><span>Anlık: <b id="rateNow">0 + 0 ml/h</b></span><span id="clockHud">Gün 1 · 00:00</span></div>
       </div>
-      <div class="hud" id="hudHelp"><b>Sol tık:</b> döndür &nbsp;·&nbsp; <b>Sağ tık:</b> kaydır<br><b>Tekerlek:</b> yakınlaş / uzaklaş</div>
-      <div class="hud" id="hudFlow" style="left:12px; bottom:64px; background:color-mix(in srgb, var(--panel) 85%, transparent); backdrop-filter:blur(6px); border:1px solid var(--border); border-radius:var(--r); padding:8px 11px; box-shadow:var(--shadow); font-size:10.5px; line-height:1.55">
+      <div class="hud sunum-hide" id="hudHelp"><b>Sol tık:</b> döndür &nbsp;·&nbsp; <b>Sağ tık:</b> kaydır<br><b>Tekerlek:</b> yakınlaş / uzaklaş</div>
+      <div class="hud sunum-hide" id="hudFlow" style="left:12px; bottom:64px; background:color-mix(in srgb, var(--panel) 85%, transparent); backdrop-filter:blur(6px); border:1px solid var(--border); border-radius:var(--r); padding:8px 11px; box-shadow:var(--shadow); font-size:10.5px; line-height:1.55">
         <div style="font-family:'Chakra Petch'; font-size:9.5px; letter-spacing:.14em; color:var(--tur); font-weight:700; margin-bottom:4px">AKIŞ YÖNLERİ</div>
         <div><span style="display:inline-block;width:11px;height:3px;background:#ff5a3c;vertical-align:middle;margin-right:6px"></span>Isı transferi (baca)</div>
         <div><span style="display:inline-block;width:11px;height:3px;background:#ff8a2e;vertical-align:middle;margin-right:6px"></span>Toprak / buz taşıma</div>
@@ -491,77 +690,132 @@ window.addEventListener('error',function(e){
       </div>
       <button id="themeBtn" title="Açık / koyu tema">☀️</button>
       <button id="fsBtn" title="Tam ekran" aria-label="Tam ekran">⛶</button>
-      <button id="orbitBtn"><span class="ic">⟳</span><span id="orbitTxt">Döndür: Kapalı</span></button>
+      <button id="orbitBtn" class="sunum-hide"><span class="ic">⟳</span><span id="orbitTxt">Döndür: Kapalı</span></button>
       <div id="timeBar">
-        <button id="backBtn" title="1 saat geri">⏮</button>
+        <button id="backBtn" title="1 saat geri" class="sunum-hide">⏮</button>
         <button id="playBtn" title="Oynat / Duraklat">▶</button>
-        <button id="fwdBtn" title="1 saat ileri">⏭</button>
-        <div class="spd"><input type="range" id="speedSl" min="1" max="10" step="1" value="3"><span id="speedTxt">3×</span></div>
+        <button id="fwdBtn" title="1 saat ileri" class="sunum-hide">⏭</button>
+        <div class="spd sunum-hide"><input type="range" id="speedSl" min="1" max="10" step="1" value="3"><span id="speedTxt">3×</span></div>
         <div class="clock" id="clockBar">Gün 1 · 00:00</div>
-        <button id="resetBtn" title="Sıfırla">↺</button>
+        <button id="resetBtn" title="Sıfırla" class="sunum-hide">↺</button>
       </div>
     </div>
     <div id="chartWrap">
-      <div id="chartTitle">Zaman Serisi — Son 2 Gün</div>
+      <div class="ctabs">
+        <button class="ctab active" data-tab="prod"><span class="cdot"></span>Su Üretimi</button>
+        <button class="ctab" data-tab="en"><span class="cdot"></span>Enerji</button>
+        <button class="ctab" data-tab="nem"><span class="cdot"></span>Nem</button>
+        <button class="ctab" data-tab="sic"><span class="cdot"></span>Sıcaklık</button>
+      </div>
       <canvas id="chart"></canvas>
       <div id="legend">
-        <div class="li"><span class="dot" style="background:#ff9a5c"></span>Dış ünite üretimi (ml/h = saatlik su üretimi)</div>
-        <div class="li"><span class="dot" style="background:#46b97d"></span>İç ünite üretimi (ml/h)</div>
-        <div class="li"><span class="dot" style="background:#5aa3e8"></span>Dış ünite fanus içi sıcaklığı (°C, sağ eksen)</div>
-        <div class="li"><span class="dot" style="background:#d9b13b"></span>Kapta toplanan su (ml, kendi ölçeğine göre)</div>
-        <div class="li"><span class="dot" style="background:#b07a3c"></span>Dış ünite toprak nemi (%, testere dişi = toprak değişimi)</div>
+        <div class="li"><span class="dot" style="background:#ff9a5c"></span>Dış Ünite</div>
+        <div class="li"><span class="dot" style="background:#46b97d"></span>İç Ünite</div>
       </div>
     </div>
   </main>
 
   <!-- SAĞ PANEL -->
   <aside class="panel right">
-    <div class="sec-h">Şu An Ne Oluyor?</div>
-    <div id="nowBox">Simülasyon başlamak için hazır.</div>
+    <details class="acc" open>
+      <summary>Şu An Ne Oluyor?</summary>
+      <div class="accbody">
+        <div class="flow" id="flowBox">
+          <div class="fstep" data-f="0"><div class="fnum">1</div><div class="ftxt">Regolit ısınıyor</div></div>
+          <div class="farrow">↓</div>
+          <div class="fstep" data-f="1"><div class="fnum">2</div><div class="ftxt">Su süblimleşiyor</div></div>
+          <div class="farrow">↓</div>
+          <div class="fstep" data-f="2"><div class="fnum">3</div><div class="ftxt">Buhar yükseliyor</div></div>
+          <div class="farrow">↓</div>
+          <div class="fstep" data-f="3"><div class="fnum">4</div><div class="ftxt">Bakır levha soğuyor</div></div>
+          <div class="farrow">↓</div>
+          <div class="fstep" data-f="4"><div class="fnum">5</div><div class="ftxt">Kırağı oluşuyor</div></div>
+          <div class="farrow">↓</div>
+          <div class="fstep" data-f="5"><div class="fnum">6</div><div class="ftxt">Eritiliyor</div></div>
+          <div class="farrow">↓</div>
+          <div class="fstep" data-f="6"><div class="fnum">7</div><div class="ftxt">Su toplanıyor</div></div>
+        </div>
+      </div>
+    </details>
 
-    <div class="sec-h">Dış Ünite (Çatı) — Canlı Ölçümler</div>
-    <div class="cards">
-      <div class="card"><div class="ck">Ortam sıcaklığı</div><div class="cv" id="m_tOut">–</div></div>
-      <div class="card"><div class="ck">Fanus içi sıcaklık</div><div class="cv" id="m_tAir">–</div><div class="cx" id="m_gh">sera kazanımı –</div></div>
-      <div class="card"><div class="ck">Bakır levha</div><div class="cv" id="m_tPlate">–</div></div>
-      <div class="card"><div class="ck">Toprak sıcaklığı</div><div class="cv" id="m_tSoil">–</div></div>
-      <div class="card"><div class="ck">Ortam nemi</div><div class="cv" id="m_rhOut">–</div></div>
-      <div class="card"><div class="ck">Fanus bağıl nemi</div><div class="cv" id="m_rh">–</div></div>
-      <div class="card"><div class="ck">Çiy noktası</div><div class="cv" id="m_td">–</div></div>
-      <div class="card"><div class="ck">Saatlik üretim</div><div class="cv" id="m_rate">–</div></div>
-      <div class="card"><div class="ck">Günlük tahmin</div><div class="cv" id="m_daily">–</div></div>
-      <div class="card"><div class="ck">Olukta biriken</div><div class="cv" id="m_gut">–</div></div>
-      <div class="card"><div class="ck">Toplam hasat</div><div class="cv" id="m_tot">–</div></div>
-      <div class="card"><div class="ck">Levha soğutma</div><div class="cv" id="m_cop">–</div></div>
-      <div class="card"><div class="ck">Toprak değişimi</div><div class="cv" id="m_swap">–</div></div>
-      <div class="card"><div class="ck">Sondaj enerjisi</div><div class="cv" id="m_drill">–</div><div class="cx">güneşten</div></div>
-      <div class="card wide"><div class="ck">Enerji verimi (elektrik başına su)</div><div class="cv" id="m_eff">–</div></div>
-    </div>
-    <div id="statusA" class="badge no"><span class="bic">●</span><span>–</span></div>
+    <details class="acc sunum-hide">
+      <summary>Canlı Ölçümler</summary>
+      <div class="accbody">
+        <div class="cards">
+          <div class="card"><div class="ck">Bakır levha</div><div class="cv" id="m_tPlate">–</div></div>
+          <div class="card"><div class="ck">Çiy noktası</div><div class="cv" id="m_td">–</div></div>
+          <div class="card"><div class="ck">Saatlik üretim</div><div class="cv" id="m_rate">–</div></div>
+          <div class="card wide"><div class="ck">Enerji verimi (elektrik başına su)</div><div class="cv" id="m_eff">–</div></div>
+        </div>
+        <div id="statusA" class="badge no"><span class="bic">●</span><span>–</span></div>
+      </div>
+    </details>
 
-    <div class="sec-h">Sistem Karşılaştırması</div>
-    <table class="cmp">
-      <thead><tr><th>Ölçüm</th><th class="cA">Dış Ünite</th><th class="cB">İç Ünite</th></tr></thead>
-      <tbody id="cmpBody"></tbody>
-    </table>
-    <div class="distil">🧪 <b>İç ünite damıtma (distilasyon) yapar:</b> regolitteki perklorat ve tuzlar buharlaşırken geride kalır; yoğuşan su saf ve içilebilirdir. Atık ısısı çatıdaki dış üniteye aktarılarak yeniden kullanılır.</div>
-    <div id="statusB" class="badge no" style="margin-top:8px"><span class="bic">●</span><span>–</span></div>
+    <details class="acc sunum-hide">
+      <summary>Diğer Ölçümler (Dış Ünite) <span class="accn">ikinci plan</span></summary>
+      <div class="accbody">
+        <div class="cards">
+          <div class="card"><div class="ck">Ortam sıcaklığı</div><div class="cv" id="m_tOut">–</div></div>
+          <div class="card"><div class="ck">Fanus içi sıcaklık</div><div class="cv" id="m_tAir">–</div><div class="cx" id="m_gh">sera kazanımı –</div></div>
+          <div class="card"><div class="ck">Toprak sıcaklığı</div><div class="cv" id="m_tSoil">–</div></div>
+          <div class="card"><div class="ck">Ortam nemi</div><div class="cv" id="m_rhOut">–</div></div>
+          <div class="card"><div class="ck">Fanus bağıl nemi</div><div class="cv" id="m_rh">–</div></div>
+          <div class="card"><div class="ck">Günlük tahmin</div><div class="cv" id="m_daily">–</div></div>
+          <div class="card"><div class="ck">Olukta biriken</div><div class="cv" id="m_gut">–</div></div>
+          <div class="card"><div class="ck">Toplam hasat</div><div class="cv" id="m_tot">–</div></div>
+          <div class="card"><div class="ck">Levha soğutma</div><div class="cv" id="m_cop">–</div></div>
+          <div class="card"><div class="ck">Toprak değişimi</div><div class="cv" id="m_swap">–</div></div>
+          <div class="card"><div class="ck">Sondaj enerjisi</div><div class="cv" id="m_drill">–</div><div class="cx">güneşten</div></div>
+        </div>
+      </div>
+    </details>
 
-    <div class="sec-h">Yıllık Üretim Tahmini</div>
-    <div class="note">O ana kadarki <b>ortalama</b> üretim hızına göre (toplam su ÷ geçen süre). 4 astronotun yıllık içme suyu ihtiyacı ≈ 2.920 L alınmıştır.</div>
-    <div class="sl" style="margin-bottom:8px"><label>Cihaz sayısı <b id="v_dev">10 cihaz</b></label><input type="range" id="s_dev" min="0" max="2" step="1" value="1"><div class="hint">1 / 10 / 1000 cihazlık kurulum.</div></div>
-    <div class="annual">
-      <div class="ah"><span class="an" style="color:var(--tur2)">Dış Ünite</span><span class="av" id="annA">0 L/yıl</span></div>
-      <div class="barbg"><div class="bar" id="barA" style="width:0%; background:linear-gradient(90deg,#f08a48,#d95f1e)"></div></div>
-      <div class="al"><span id="annAp">ihtiyacın %0'ı</span><span>hedef: 2.920 L</span></div>
-    </div>
-    <div class="annual">
-      <div class="ah"><span class="an" style="color:var(--yes)">İç Ünite</span><span class="av" id="annB">0 L/yıl</span></div>
-      <div class="barbg"><div class="bar" id="barB" style="width:0%; background:linear-gradient(90deg,#46b97d,#1e8a55)"></div></div>
-      <div class="al"><span id="annBp">ihtiyacın %0'ı</span><span>hedef: 2.920 L</span></div>
-    </div>
+    <details class="acc sunum-hide">
+      <summary>Sistem Karşılaştırması</summary>
+      <div class="accbody">
+        <div class="twin">
+          <div class="tcard iic">
+            <div class="th"><span class="tn">İç Ünite</span><span class="tt">Aktif</span></div>
+            <div class="trow"><span>Su üretimi</span><b id="tw_B_rate">–</b></div>
+            <div class="trow"><span>Toplam hasat</span><b id="tw_B_tot">–</b></div>
+            <div class="trow"><span>Enerji verimi</span><b id="tw_B_eff">–</b></div>
+          </div>
+          <div class="tmid">↓ TOPLAM SİSTEM ↓</div>
+          <div class="tsum"><div class="tsn">Toplam Su Üretimi</div><div class="tsv" id="tw_sum">0 ml</div></div>
+          <div class="tcard dis">
+            <div class="th"><span class="tn">Dış Ünite</span><span class="tt">Pasif</span></div>
+            <div class="trow"><span>Su üretimi</span><b id="tw_A_rate">–</b></div>
+            <div class="trow"><span>Toplam hasat</span><b id="tw_A_tot">–</b></div>
+            <div class="trow"><span>Enerji verimi</span><b id="tw_A_eff">–</b></div>
+          </div>
+        </div>
+        <div class="distil">🧪 <b>İç ünite damıtma (distilasyon) yapar:</b> regolitteki perklorat ve tuzlar buharlaşırken geride kalır; yoğuşan su saf ve içilebilirdir. Atık ısısı çatıdaki dış üniteye aktarılarak yeniden kullanılır.</div>
+        <div id="statusB" class="badge no" style="margin-top:8px"><span class="bic">●</span><span>–</span></div>
+      </div>
+    </details>
+
+    <details class="acc sunum-hide">
+      <summary>Yıllık Üretim Tahmini</summary>
+      <div class="accbody">
+        <div class="note">O ana kadarki <b>ortalama</b> üretim hızına göre (toplam su ÷ geçen süre). 1 astronot ≈ 2 L/gün ≈ 730 L/yıl; 4 astronotun yıllık içme suyu ihtiyacı ≈ 2.920 L alınmıştır.</div>
+        <div class="sl" style="margin-bottom:8px"><label>Cihaz sayısı <b id="v_dev">10 adet</b></label><input type="range" id="s_dev" min="1" max="1000" step="1" value="10"><div class="hint">1 ile 1000 arasında ikiz sistem sayısı. Üretim ve enerji orantılı büyür; bakım yükü hafif üstel artar.</div></div>
+        <div class="annual">
+          <div class="ah"><span class="an" style="color:var(--tur2)">Dış Ünite</span><span class="av" id="annA">0 L/yıl</span></div>
+          <div class="barbg"><div class="bar" id="barA" style="width:0%; background:linear-gradient(90deg,#f08a48,#d95f1e)"></div></div>
+          <div class="al"><span id="annAp">ihtiyacın %0'ı</span><span>hedef: 2.920 L</span></div>
+        </div>
+        <div class="annual">
+          <div class="ah"><span class="an" style="color:var(--yes)">İç Ünite</span><span class="av" id="annB">0 L/yıl</span></div>
+          <div class="barbg"><div class="bar" id="barB" style="width:0%; background:linear-gradient(90deg,#46b97d,#1e8a55)"></div></div>
+          <div class="al"><span id="annBp">ihtiyacın %0'ı</span><span>hedef: 2.920 L</span></div>
+        </div>
+        <div class="distil" id="devNeed" style="margin-top:6px">Kaç cihaz gerekir hesaplanıyor…</div>
+        <div class="distil" id="maintIdx" style="margin-top:6px">Bakım yükü indeksi hesaplanıyor…</div>
+      </div>
+    </details>
   </aside>
 </div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -574,7 +828,8 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const SOL=24.66;               // 1 Mars günü (saat)
 const NEED_Y=2920;             // 4 astronot, L/yıl
 const FANUS_V=0.008;           // m³ (20×20×20 cm)
-const EVAP_K=20, COND_IN=2.8, COND_OUT=1.5, DISTIL=3.5, CHIM_EFF=0.70;   // kalibrasyon sabitleri (baca verimi %70)
+const EVAP_K=20, COND_IN=2.8, COND_OUT=1.5, DISTIL=3.5;   // kalibrasyon sabitleri
+const REGOLITH_BATCH_G=3000;   // her sondaj/değişimde çıkarılan regolit kütlesi (g)
 const VENT_IN=20, VENT_OUT=2;  // havalandırma debisi (hacim/saat): iç ünite aktif, dış yavaş Mars sızıntısı
 
 // Magnus formülü — doyma buhar basıncı (hPa) ve çiy noktası
@@ -588,22 +843,22 @@ function dewPoint(T,RH){
 
 /* ---- Senaryolar (yalnızca AÇIK MARS ortamını değiştirir) ---- */
 const SCENARIOS=[
- {id:'std',  name:'1 · Mars Standart',        t:-60,p:0.7,sol:590,rh:30,soil:5, pin:0.7, swing:8,
-  desc:'Ortalama bir Mars günü: çok soğuk, çok kuru. Az üretim beklenir.'},
- {id:'yaz',  name:'2 · Mars Yaz Öğlesi',      t:-20,p:0.9,sol:700,rh:20,soil:8, pin:0.9, swing:10,
-  desc:'Yoğun güneş toprağı ısıtır, nem artar; ama levhayı soğutmak zorlaşır. Orta üretim.'},
- {id:'gece', name:'3 · Mars Gecesi',          t:-100,p:0.7,sol:0,rh:35,soil:5, pin:0.7, swing:0, pel:100, night:true,
-  desc:'Güneş yok; −100 °C dış ortamda levha pasif olarak çok kolay soğur ama havadaki su çok az; sınırlı üretim.'},
- {id:'dunya',name:'4 · Dünya Testi',          t:20,p:101,sol:600,rh:55,soil:26, pin:101, swing:4,
-  desc:'Kontrol deneyi: bol nem, yüksek üretim. Mars sonuçlarıyla karşılaştırma ölçütü.'},
- {id:'utopia',name:'5 · Su Bölgesi (Utopia Planitia)', t:-22,p:1.0,sol:665,rh:40,soil:45, pin:1.0, swing:8, recharge:18,
-  desc:'Mars\'ın kuzeyindeki alçak ova; basınç biraz daha yüksek ve yüzeye yakın yer altı buzu var (Viking-2 ve Zhurong\'un indiği bölge). Isıtmayla buz süblimleşir → diğer Mars senaryolarından belirgin yüksek üretim.'},
- {id:'opt',  name:'6 · Optimum Tasarım',      t:-20,p:1.0,sol:700,rh:30,soil:26, pin:0.7, swing:8, pel:100, ang:35, ins:1.8,
-  desc:'Senin en iyi parametre kombinasyonun. Kaydırıcılarla oynayarak rekoru geliştir!'}
+ {id:'std',  name:'1 · Standart Mars Günü',    t:-60,p:0.7,sol:590,rh:30,soil:4, pin:0.7, swing:8, icon:'🪐', accent:'#ec7b3c',
+  desc:'Ortalama bir Mars günü: çok soğuk, çok ince atmosfer, regolitte az bağlı su. Düşük üretim beklenir.'},
+ {id:'yaz',  name:'2 · Mars Yaz Öğlesi',       t:-20,p:0.9,sol:700,rh:20,soil:5, pin:0.9, swing:10, icon:'☀', accent:'#d9b13b',
+  desc:'Güneş regoliti ısıtır; süblimleşme hızlanır, ama levhayı çiy noktasının altına indirmek zorlaşır. Orta üretim.'},
+ {id:'gece', name:'3 · Mars Gecesi',           t:-100,p:0.7,sol:0,rh:35,soil:4, pin:0.7, swing:0, pel:100, night:true, icon:'🌙', accent:'#3a4a8a',
+  desc:'Güneş yok; −100 °C ortamda pasif levha çok kolay soğur ama süblimleşecek su buharı çok az; sınırlı üretim.'},
+ {id:'kis',  name:'4 · Mars Kışı',             t:-90,p:0.45,sol:230,rh:20,soil:3, pin:0.45, swing:5, icon:'❄', accent:'#8fd3e8',
+  desc:'Kutuplarda CO₂ donarken küresel atmosfer basıncı mevsimsel olarak düşer. Zayıf güneş + ince atmosfer → yılın en düşük üretimi.'},
+ {id:'utopia',name:'5 · Mars Test Bölgesi (Utopia Planitia)', t:-22,p:1.0,sol:665,rh:40,soil:9, pin:1.0, swing:8, recharge:18, icon:'🧊', accent:'#4fd8e8',
+  desc:'Mars\'ın kuzeyindeki alçak ova; basınç biraz daha yüksek (~1,0 kPa) ve yüzeye yakın yer altı buzu var (Viking-2 ve Zhurong\'un indiği bölge). Isıtmayla buz süblimleşir → diğer Mars senaryolarından belirgin yüksek üretim.'},
+ {id:'opt',  name:'6 · Optimum Parametre Analizi', t:-20,p:1.0,sol:700,rh:30,soil:8, pin:0.7, swing:8, pel:100, ang:45, ins:1.8, chim:0.85, icon:'⚙', accent:'#a970d6',
+  desc:'Serbest deney modu: bakır açı, cam kalınlığı, baca verimi, Peltier gücü, nem, basınç ve sıcaklığı kendin ayarlayarak en verimli sistemi bul. Optimum bakır açı ~45°.'}
 ];
 
 /* ---- Genel parametreler (kaydırıcılar) ---- */
-const P={tOut:-60,pOut:0.7,sol:590,soil:5,pel:60,ang:30,ins:1.0,pin:0.7,scenario:'std',
+const P={tOut:-60,pOut:0.7,sol:590,soil:4,pel:60,ang:45,ins:1.0,pin:0.7,chim:0.70,scenario:'std',
          refill:true, refillMode:'thr', refillThr:25, refillInt:8};
 
 /* ---- Sistem durumu ---- */
@@ -615,8 +870,8 @@ function newSys(base){return{
   frost:0, defrostT:0, melting:0
 };}
 const A=newSys(false), B=newSys(true);
-function fillSoil(sys,moistPct){ sys.soilCap=Math.max(1,30*moistPct); sys.soilWater=sys.soilCap; } // 3 kg regolit → %1 nem = 30 g su
-fillSoil(A,P.soil); fillSoil(B,45);
+function fillSoil(sys,moistPct){ sys.soilCap=Math.max(1,REGOLITH_BATCH_G*moistPct/100); sys.soilWater=sys.soilCap; } // örn. 3000 g regolit × %4 nem = 120 g su
+fillSoil(A,P.soil); fillSoil(B,9);   // iç ünite: özel seçilmiş, nemi zenginleştirilmiş regolit (aralığın üst ucu)
 
 let simTime=0;            // saat
 let playing=false, speed=3, autoOrbit=false;
@@ -645,7 +900,7 @@ function stepSystem(S,env,dt){
     tSoilT=Math.min(S.tAir+18+env.solar*0.006, 55);           // ısıtıcı → toprak ~40 °C
   }else{
     const wB=clamp(env.wasteBoost||0,0,1);                    // bacadan gelen atık ısı (verim dahil)
-    tSoilT=Math.min(env.tOut+8+40*wB+env.solar*0.012, 45);    // atık ısı + güneş toprağı ısıtır
+    tSoilT=Math.min(env.tOut+8+40*wB+env.solar*0.012, 45);    // atık ısı + güneş regoliti ısıtır → süblimleşme hızlanır
   }
   S.tSoil+=(tSoilT-S.tSoil)*Math.min(1,dt/1.0);
 
@@ -656,33 +911,41 @@ function stepSystem(S,env,dt){
   if(S.base){
     tAirT=22 + clamp(env.solar*0.02,0,3);                     // habitat 22 °C (kontrollü, 18–25)
   }else{
-    const gh=clamp(env.solar*0.045*env.ins,0,38);             // sera kazanımı (güneş)
-    const soilWarm=Math.max(0,S.tSoil-env.tOut)*0.45;         // ısınan toprak havayı taşır
+    // Cam kalınlığı gerçek bir ödünleşim yaratır: kalınlaştıkça ısıyı içeride daha iyi TUTAR (retain↑)
+    // ama aynı zamanda güneş IŞIĞINI daha az GEÇİRİR (transmit↓) — iki etki birbirine zıt yönde çalışır.
+    const transmit=clamp(1.25-0.5*(env.ins-0.5)/1.5, 0.55, 1.25);
+    const retain  =clamp(0.55+0.45*(env.ins-0.5)/1.5, 0.55, 1.0);
+    const gh=clamp(env.solar*0.045*transmit,0,38);             // sera kazanımı (güneş geçirgenliğine bağlı)
+    const soilWarm=Math.max(0,S.tSoil-env.tOut)*0.45*retain;  // ısınan regolitten ısı tutulumu
     tAirT=env.tOut + gh + soilWarm;
   }
   tAirT=clamp(Math.min(tAirT, env.tOut+50, 40), -124, 40);
   S.tAir+=(tAirT-S.tAir)*Math.min(1,dt/0.5);
 
-  // 3) LEVHA soğutma — İç: aktif Peltier (-5..-20, taban -30); Dış: pasif Mars soğuğu (ortam-8..-20, taban -80)
+  // 3) LEVHA soğutma — İç: aktif Peltier (sıcak tarafı bacayla dış Mars atmosferine ısı atar);
+  //    Dış: pasif Mars soğuğu. Mars atmosferi inceldikçe konveksiyon zayıflar, ısı atımı zorlaşır.
   if(S.base){
-    S.dT=18+22*(env.pel/100);                                 // Peltier ΔT 18..40
+    const rej=clamp(0.42+0.58*Math.sqrt(clamp(P.pOut,0.3,1.15)/1.15), 0.42, 1);  // basınca bağlı ısı atım verimi
+    S.dT=(18+22*(env.pel/100))*rej;                           // ΔT hedefi ısı atım verimiyle ölçeklenir
     S.tPlate=clamp(S.tAir-S.dT, -30, S.tAir-3);               // taban -30 °C; daima havadan soğuk
-    S.cop=clamp(0.9-S.dT/80,0.30,0.75);
+    S.cop=clamp((0.9-S.dT/80)*rej,0.15,0.75);
+    S._rej=rej;
   }else{
     const sky=6+11*(1-clamp(env.solar/500,0,1));             // gökyüzü ışıması: gündüz ~6, gece ~17 °C
     S.tPlate=clamp(env.tOut-sky, -80, env.tOut-3);           // Mars ortamından 6-17 °C soğuk (std: -66..-77)
     S.dT=S.tAir-S.tPlate; S.cop=0;
   }
 
-  // 4) Buharlaşma / süblimleşme: topraktaki su → fanus havası
+  // 4) Süblimleşme: regolitteki buz, düşük atmosfer basıncı nedeniyle doğrudan su buharına dönüşür
   const moist=100*S.soilWater/S.soilCap*(env.soilPct/100);    // etkin nem
-  const pres=clamp(Math.sqrt(101/Math.max(env.pin,0.3)),1,4); // düşük basınç → kolay süblimleşme
-  const fT=clamp((S.tSoil+90)/70,0,1.6);                     // sıcak toprak → hızlı buharlaşma
-  const tEff=(S.tAir+S.tSoil)/2;                              // sıcak toprak üstündeki karışım havası
+  const pres=clamp(Math.sqrt(1.15/Math.max(env.pin,0.15)),1,2.4); // Mars basınç aralığı içinde: düşük basınç → kolay süblimleşme
+  const fT=clamp((S.tSoil+90)/70,0,1.6);                     // sıcak regolit → hızlı süblimleşme
+  const tEff=(S.tAir+S.tSoil)/2;                              // sıcak regolit üstündeki karışım havası
   const room=clamp(1-S.ah/Math.max(ahSat(tEff),1e-6),0,1);
-  let evap=EVAP_K*(moist/100)*fT*pres*room;                  // g/h (buharlaşma potansiyeli)
+  let evap=EVAP_K*(moist/100)*fT*pres*room;                  // g/h (süblimleşme potansiyeli)
   if(S.base) evap*=DISTIL;                                    // üs içi: kontrollü distilasyon verimi
   evap=Math.min(evap, S.soilWater/Math.max(dt,1e-6));        // toprak suyu sınırı
+  S.evap=evap;                                                // UI: süreç akışı için anlık süblimleşme hızı
   // --- TOPRAK TAKVİYESİ: derin buzlu regolitten sondajla taze nemli toprak ---
   S.refillTimer+=dt;
   if(S.swapFlash>0) S.swapFlash=Math.max(0,S.swapFlash-dt*1.5);
@@ -705,7 +968,8 @@ function stepSystem(S,env,dt){
   // 5) NEM DENGESİ — iyi karışmış kontrol hacmi (yarı-kararlı); RH %100'de takılmaz, dalgalanır
   const ahPlate=ahSat(S.tPlate);                             // levha yüzeyinde doygun mutlak nem (g/m³)
   const ahOut  = S.base ? ahSat(22)*0.45 : ahSat(env.tOut)*(env.rhOut/100); // iç: habitat %45; dış: Mars atmosferi
-  const k      = S.base ? COND_IN : COND_OUT;                // yoğuşma iletkenliği (m³/h)
+  const angFactor=clamp(1-Math.pow((P.ang-45)/45,2)*0.32, 0.55, 1);  // bakır çatı açısı: ~45° civarı en verimli yoğuşma yüzeyi
+  const k      = (S.base ? COND_IN : COND_OUT)*angFactor;   // yoğuşma iletkenliği (m³/h), açıya bağlı
   const ventV  = (S.base ? VENT_IN : VENT_OUT)*FANUS_V;      // havalandırma debisi (m³/h)
   // denge: evap + ventV·ahOut = k·(ah−ahPlate) + ventV·ah  ⇒ ahEq
   const ahEq=(evap + ventV*ahOut + k*ahPlate)/(k+ventV);
@@ -734,12 +998,14 @@ function stepSystem(S,env,dt){
     S.gutter += cond;                                         // levha ≥ 0 → doğrudan sıvı su
   }
   if(S.melting>0) S.melting=Math.max(0,S.melting-dt*1.5);
-  // oluk → kap (üs içi depolama)
-  const drain=S.gutter*Math.min(1,2.5*dt);
+  // oluk → kap (üs içi depolama); bakır açısı oluk akış verimini de hafifçe etkiler
+  const drain=S.gutter*Math.min(1,2.5*dt*(0.75+0.25*angFactor));
   S.gutter-=drain; S.total+=drain;
+  S.drainNow=drain;                                           // UI: süreç akışı için anlık oluk drenajı
 
-  // 8) Enerji — İç: Peltier (290 W×güç) + ısıtıcı (50 W) + kontrol (15 W);  Dış: yalnız fan+kontrol (ısı geri kazanım)
-  if(S.base) S.kwh+=(0.290*(env.pel/100)+0.050+0.015)*dt;
+  // 8) Enerji — İç: Peltier (290 W×güç, basınca bağlı ısı-atım verimiyle ölçeklenir) + ısıtıcı (50 W) + kontrol (15 W)
+  //    Dış: yalnız fan+kontrol (ısı geri kazanım)
+  if(S.base) S.kwh+=(0.290*(env.pel/100)/Math.max(S._rej,0.2)+0.050+0.015)*dt;
   else       S.kwh+=(0.005+0.0035*S.rate)*dt;                // dış: fan+pompa üretimle ölçeklenir → yüksek verim
 }
 
@@ -750,10 +1016,10 @@ function envOpen(h){
           solar:solarAt(h,P.sol,sc.night),
           rhOut:sc.rh, soilPct:P.soil, pin:P.pin, ins:P.ins, pel:P.pel,
           recharge:sc.recharge||0,
-          wasteBoost:(P.pel/100)*CHIM_EFF };  // iç ünite Peltier atık ısısı × baca verimi
+          wasteBoost:(P.pel/100)*P.chim };  // iç ünite Peltier atık ısısı × ısı transfer bacası verimi
 }
-function envBase(){ // üs içi koşullar SABİT: 22 °C, 101 kPa, %45 nem; sondajla %45 toprak nemi
-  return{ tOut:22, solar:0, rhOut:45, soilPct:45, pin:101, ins:1, pel:P.pel, recharge:0 };
+function envBase(){ // üs içi koşullar SABİT: 22 °C habitat, kontrollü nem; özel seçilmiş regolit ile beslenir
+  return{ tOut:22, solar:0, rhOut:45, soilPct:9, pin:101, ins:1, pel:P.pel, recharge:0 };
 }
 function advance(dh){
   const step=0.04;
@@ -773,8 +1039,9 @@ const snaps=[];
 function sampleChart(){
   if(simTime-lastSample<0.2) return;
   lastSample=simTime;
-  chartBuf.push({t:simTime,rA:A.rate,rB:B.rate,tA:A.tAir,tot:A.total+B.total,
-                 mA:100*A.soilWater/A.soilCap, mB:100*B.soilWater/B.soilCap});
+  chartBuf.push({t:simTime,rA:A.rate,rB:B.rate,tA:A.tAir,tB:B.tAir,tot:A.total+B.total,
+                 mA:100*A.soilWater/A.soilCap, mB:100*B.soilWater/B.soilCap,
+                 eA:A.kwh, eB:B.kwh});
   if(chartBuf.length>260) chartBuf.shift();
   snaps.push({t:simTime,A:JSON.parse(JSON.stringify(A)),B:JSON.parse(JSON.stringify(B)),buf:chartBuf.length});
   if(snaps.length>320) snaps.shift();
@@ -792,7 +1059,7 @@ function rewind(hours){
 }
 function resetSim(keepParams=true){
   Object.assign(A,newSys(false)); Object.assign(B,newSys(true));
-  fillSoil(A,P.soil); fillSoil(B,45);
+  fillSoil(A,P.soil); fillSoil(B,9);
   A.tAir=A.tSoil=P.tOut; A.tPlate=P.tOut-30;
   simTime=0; lastSample=-1; chartBuf.length=0; snaps.length=0;
   if(window.resetVisuals) resetVisuals();
@@ -1382,35 +1649,49 @@ function drawChart(){
   cg.setTransform(2,0,0,2,0,0); cg.clearRect(0,0,w,h);
   const css=getComputedStyle(document.body);
   const cGrid=css.getPropertyValue('--border').trim(), cTxt=css.getPropertyValue('--muted').trim();
-  const padL=44,padR=44,padT=8,padB=20, iw=w-padL-padR, ih=h-padT-padB;
-  cg.font='10px IBM Plex Sans'; cg.strokeStyle=cGrid; cg.fillStyle=cTxt; cg.lineWidth=1;
-  if(chartBuf.length<2){cg.fillText('Veri toplanıyor…',padL,padT+14);return;}
+  const CA='#ff9a5c', CB='#46b97d';   // Dış Ünite = turuncu, İç Ünite = yeşil — her sekmede aynı renk kodu
+  if(chartBuf.length<2){cg.font='10px IBM Plex Sans'; cg.fillStyle=cTxt; cg.fillText('Veri toplanıyor…',10,18); return;}
   const t0=chartBuf[0].t, t1=chartBuf[chartBuf.length-1].t, tr=Math.max(t1-t0,0.5);
-  let maxR=0.5,minT=1e9,maxT=-1e9,maxTot=1;
-  for(const p of chartBuf){maxR=Math.max(maxR,p.rA,p.rB);minT=Math.min(minT,p.tA);maxT=Math.max(maxT,p.tA);maxTot=Math.max(maxTot,p.tot);}
-  maxR*=1.15; if(maxT-minT<10){maxT+=5;minT-=5;}
+
+  const PANELS={
+    prod:{unit:v=>v.toFixed(1), keyA:'rA', keyB:'rB', min0:true},
+    sic: {unit:v=>v.toFixed(0)+'°', keyA:'tA', keyB:'tB', min0:false},
+    nem: {unit:v=>v.toFixed(0)+'%', keyA:'mA', keyB:'mB', min0:true, fixedMax:100},
+    en:  {unit:v=>v.toFixed(2), keyA:'eA', keyB:'eB', min0:true},
+  };
+  const pnl=PANELS[chartTab]||PANELS.prod;
+
+  // sekmeli — yalnızca seçilen panel, tam boyutta, kendi ekseninde
+  const padL=40,padR=10,padT=6,padB=16, iw=w-padL-padR, ih=h-padT-padB;
+  let mn=1e9, mx=-1e9;
+  for(const p of chartBuf){ mn=Math.min(mn,p[pnl.keyA],p[pnl.keyB]); mx=Math.max(mx,p[pnl.keyA],p[pnl.keyB]); }
+  if(pnl.min0) mn=Math.min(0,mn);
+  if(pnl.fixedMax) mx=pnl.fixedMax;
+  if(mx-mn<0.001) mx=mn+1;
+  mx*=pnl.min0?1.12:1; if(!pnl.min0 && mx-mn<8){mx+=4;mn-=4;}
   const X=t=>padL+iw*(t-t0)/tr;
-  const Yr=v=>padT+ih*(1-v/maxR);
-  const Yt=v=>padT+ih*(1-(v-minT)/(maxT-minT));
-  const Yo=v=>padT+ih*(1-v/maxTot);
-  // ızgara + eksen yazıları
-  for(let i=0;i<=4;i++){const y=padT+ih*i/4;
-    cg.globalAlpha=0.6;cg.beginPath();cg.moveTo(padL,y);cg.lineTo(w-padR,y);cg.stroke();cg.globalAlpha=1;
-    cg.textAlign='right';cg.fillText((maxR*(1-i/4)).toFixed(1),padL-5,y+3);
-    cg.textAlign='left';cg.fillText((maxT-(maxT-minT)*i/4).toFixed(0)+'°',w-padR+5,y+3);}
-  cg.textAlign='center';
-  for(let i=0;i<=4;i++){const t=t0+tr*i/4;cg.fillText('Gün '+(Math.floor(t/SOL)+1)+' '+String(Math.floor(t%SOL)).padStart(2,'0')+':00',X(t),h-6);}
-  function line(key,Y,color,wd,dash){
-    cg.strokeStyle=color;cg.lineWidth=wd;cg.setLineDash(dash||[]);cg.beginPath();
-    chartBuf.forEach((p,i)=>{const x=X(p.t),y=Y(p[key]); i?cg.lineTo(x,y):cg.moveTo(x,y);});
-    cg.stroke();cg.setLineDash([]);
+  const Y=v=>padT+ih*(1-(v-mn)/(mx-mn));
+  // ızgara + eksen değerleri (4 çizgi)
+  cg.strokeStyle=cGrid; cg.fillStyle=cTxt; cg.lineWidth=1; cg.font='10px IBM Plex Sans';
+  for(let i=0;i<=4;i++){
+    const yy=padT+ih*i/4;
+    cg.globalAlpha=0.55; cg.beginPath(); cg.moveTo(padL,yy); cg.lineTo(w-padR,yy); cg.stroke(); cg.globalAlpha=1;
+    cg.textAlign='right'; cg.fillText(pnl.unit(mx-(mx-mn)*i/4), padL-6, yy+3);
   }
-  const Ym=v=>padT+ih*(1-clamp(v,0,100)/100);
-  line('mA',Ym,'#b07a3c',1.4,[3,3]);   // dış ünite toprak nemi (%) — testere dişi
-  line('tot',Yo,'#d9b13b',1.4,[5,4]);
-  line('tA',Yt,'#5aa3e8',1.4);
-  line('rA',Yr,'#ff9a5c',2.2);
-  line('rB',Yr,'#46b97d',2.2);
+  cg.strokeStyle=cGrid; cg.globalAlpha=0.7; cg.strokeRect(padL,padT,iw,ih); cg.globalAlpha=1;
+  function line(key,color){
+    cg.strokeStyle=color; cg.lineWidth=2.2; cg.beginPath();
+    chartBuf.forEach((p,i)=>{ const x=X(p.t), y=Y(p[key]); i?cg.lineTo(x,y):cg.moveTo(x,y); });
+    cg.stroke();
+  }
+  line(pnl.keyA,CA); line(pnl.keyB,CB);
+  // zaman ekseni
+  cg.font='9px IBM Plex Sans'; cg.fillStyle=cTxt; cg.textAlign='center';
+  for(let i=0;i<=4;i++){
+    const t=t0+tr*i/4;
+    const lbl='Gün '+(Math.floor(t/SOL)+1)+' '+String(Math.floor(t%SOL)).padStart(2,'0')+':00';
+    cg.fillText(lbl, padL+iw*i/4, h-3);
+  }
 }
 
 /* ================================================================
@@ -1418,18 +1699,26 @@ function drawChart(){
    ================================================================ */
 const $=id=>document.getElementById(id);
 const fmt=(v,d=1)=>v.toLocaleString('tr-TR',{minimumFractionDigits:d,maximumFractionDigits:d});
+function fmtVol(ml){                 // 999 ml → 1,0 L; üst sınırsız, gerekirse milyon L'ye döner
+  if(ml<1000) return fmt(ml,1)+' ml';
+  const L=ml/1000;
+  if(L<1000) return fmt(L,2)+' L';
+  if(L<1e6) return fmt(L,0)+' L';
+  return fmt(L/1e6,2)+' milyon L';
+}
 function fmtClock(){const g=Math.floor(simTime/SOL)+1, hh=simTime%SOL;
   return 'Gün '+g+' · '+String(Math.floor(hh)).padStart(2,'0')+':'+String(Math.floor(hh%1*60)).padStart(2,'0');}
 
 const sliders=[
  ['tOut','s_tOut','v_tOut',v=>fmt(v,0)+' °C'],
- ['pOut','s_pOut','v_pOut',v=>fmt(v,1)+' kPa'],
+ ['pOut','s_pOut','v_pOut',v=>fmt(v,2)+' kPa'],
  ['sol','s_sol','v_sol',v=>fmt(v,0)+' W/m²'],
- ['soil','s_soil','v_soil',v=>'%'+fmt(v,0)],
+ ['soil','s_soil','v_soil',v=>'%'+fmt(v,1)],
  ['pel','s_pel','v_pel',v=>'%'+fmt(v,0)+' ('+fmt(2.88*v/100*100,0)+' W)'],
  ['ang','s_ang','v_ang',v=>fmt(v,0)+'°'],
  ['ins','s_ins','v_ins',v=>'×'+fmt(v,2)],
- ['pin','s_pin','v_pin',v=>fmt(v,1)+' kPa'],
+ ['chim','s_chim','v_chim',v=>'%'+fmt(v*100,0)],
+ ['pin','s_pin','v_pin',v=>fmt(v,2)+' kPa'],
 ];
 function syncSliderLabels(){for(const[k,s,l,f]of sliders){$(s).value=P[k];$(l).textContent=f(P[k]);} syncRefillUI();}
 for(const[k,s,l,f]of sliders){
@@ -1460,14 +1749,21 @@ function buildScenarios(){
   const box=$('scenList'); box.innerHTML='';
   for(const sc of SCENARIOS){
     const b=document.createElement('button'); b.className='scen'+(P.scenario===sc.id?' active':'');
-    b.innerHTML=`<div class="sn">${sc.name}</div><div class="sd">${sc.desc}</div>`;
+    b.title=sc.desc;
+    b.innerHTML=`<span class="sic" style="color:${sc.accent}">${sc.icon}</span><span class="stx"><div class="sn">${sc.name.replace(/^\d+\s*·\s*/,'')}</div><div class="sd">${sc.desc}</div></span>`;
     b.addEventListener('click',()=>{
       P.scenario=sc.id; P.tOut=sc.t;P.pOut=sc.p;P.sol=sc.sol;P.soil=sc.soil;P.pin=sc.pin;
-      if(sc.pel)P.pel=sc.pel; if(sc.ang){P.ang=sc.ang;sysA.rebuild(P.ang);sysB.rebuild(P.ang);} if(sc.ins)P.ins=sc.ins;
+      if(sc.pel)P.pel=sc.pel; if(sc.ang){P.ang=sc.ang;sysA.rebuild(P.ang);sysB.rebuild(P.ang);} if(sc.ins)P.ins=sc.ins; if(sc.chim)P.chim=sc.chim;
       fillSoil(A,P.soil); A.tAir=A.tSoil=P.tOut;
       syncSliderLabels(); buildScenarios();
     });
     box.appendChild(b);
+  }
+  const cur=SCENARIOS.find(s=>s.id===P.scenario);
+  if(cur){
+    const shortName=cur.name.replace(/^\d+\s*·\s*/,'');
+    $('scenAccn').textContent=cur.icon+' '+shortName;
+    $('hScen').textContent=shortName; $('hScenSub').textContent=cur.desc.split('.')[0]+'.';
   }
 }
 
@@ -1481,10 +1777,25 @@ $('themeBtn').addEventListener('click',()=>{
   const r=document.documentElement, d=r.dataset.theme==='dark';
   r.dataset.theme=d?'light':'dark'; $('themeBtn').textContent=d?'🌙':'☀️';
 });
+/* ---- akordiyonlar birbirinden bağımsız: kullanıcı istediğini açık/kapalı bırakabilir ---- */
+/* ---- Sunum Modu / Mühendis Modu ---- */
+$('modeBtn').addEventListener('click',()=>{
+  const on=document.body.classList.toggle('sunum');
+  $('modeBtn').innerHTML=on?'🔧 Mühendis Modu':'🎓 Sunum Modu';
+  requestAnimationFrame(()=>{ _rw=_rh=0; resize(); });
+});
+/* ---- grafik sekmeleri ---- */
+let chartTab='prod';
+document.querySelectorAll('.ctab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.ctab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active'); chartTab=t.dataset.tab; drawChart();
+  });
+});
 function applyScenarioById(id){
   const sc=SCENARIOS.find(s=>s.id===id); if(!sc) return;
   P.scenario=sc.id; P.tOut=sc.t; P.pOut=sc.p; P.sol=sc.sol; P.soil=sc.soil; P.pin=sc.pin;
-  if(sc.pel)P.pel=sc.pel; if(sc.ang){P.ang=sc.ang; sysA.rebuild(P.ang); sysB.rebuild(P.ang);} if(sc.ins)P.ins=sc.ins;
+  if(sc.pel)P.pel=sc.pel; if(sc.ang){P.ang=sc.ang; sysA.rebuild(P.ang); sysB.rebuild(P.ang);} if(sc.ins)P.ins=sc.ins; if(sc.chim)P.chim=sc.chim;
   fillSoil(A,P.soil); A.tAir=A.tSoil=P.tOut;
   syncSliderLabels(); buildScenarios(); resetSim(true);
 }
@@ -1508,16 +1819,19 @@ function reason(S){
   return 'yoğuşma sürüyor';
 }
 function narrate(){
-  const a= A.rate>0.05
-    ? `<b>Dış Ünite:</b> levha çiy noktasının ${fmt(A.td-A.tPlate,0)} °C altında, su ${A.rate>1?'hızla':'yavaşça'} toplanıyor.`
-    : `<b>Dış Ünite:</b> ${reason(A)}.`;
-  const b= B.rate>0.05
-    ? `<b>İç Ünite:</b> levha çiy noktasının ${fmt(B.td-B.tPlate,0)} °C altında, damıtılmış saf su hızla birikiyor.`
-    : `<b>İç Ünite:</b> ${reason(B)}.`;
-  const sc=SCENARIOS.find(s=>s.id===P.scenario);
-  const sol=solarAt(simTime,P.sol,sc.night);
-  const gun=sol>50?'Güneş toprağı ısıtıyor.':'Şu an güneş yok; sistem ısıtıcıyla çalışıyor.';
-  $('nowBox').innerHTML=`${gun}<br>${a}<br>${b}`;
+  // İç Ünite (B) sinyallerinden gerçek zamanlı süreç adımı belirlenir
+  let active=0;
+  if(B.evap>0.3) active=1;                 // süblimleşme oluyor
+  if(B.rh>35) active=2;                    // fanus içinde buhar birikiyor
+  if(B.tPlate < B.tAir-3) active=3;        // levha soğutuluyor
+  if(B.frost>0.05) active=4;               // kırağı birikiyor
+  if(B.melting>0.01) active=5;             // eritme modunda
+  if(B.drainNow>0.01) active=6;            // oluktan kaba akıyor
+  document.querySelectorAll('#flowBox .fstep').forEach(el=>{
+    const i=+el.dataset.f;
+    el.classList.toggle('on', i===active);
+    el.classList.toggle('done', i<active);
+  });
 }
 function setBadge(id,S,name){
   const el=$(id), on=S.rate>0.02;
@@ -1529,14 +1843,25 @@ function setBadge(id,S,name){
 }
 
 /* ---- panel güncelleme ---- */
-const DEV=[1,10,1000]; let devSel=1;
-$('s_dev').addEventListener('input',e=>{devSel=+e.target.value;$('v_dev').textContent=DEV[devSel].toLocaleString('tr-TR')+' cihaz';});
+let devCount=10;
+$('s_dev').addEventListener('input',e=>{devCount=+e.target.value;$('v_dev').textContent=devCount.toLocaleString('tr-TR')+' adet';});
+/* ---- Jüri Modu (Bilimsel Açıklamalar) ---- */
+(function(){
+  const jp=$('juryPanel'), openBtn=$('juryBtn'), closeBtn=$('juryClose');
+  if(!jp||!openBtn) return;
+  function open(){ jp.classList.add('open'); }
+  function close(){ jp.classList.remove('open'); }
+  openBtn.addEventListener('click',open);
+  closeBtn.addEventListener('click',close);
+  jp.addEventListener('click',e=>{ if(e.target===jp) close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+})();
 let uiAcc=0;
 function updateUI(dtr){
   uiAcc+=dtr; if(uiAcc<0.25)return; uiAcc=0;
   const env=envOpen(simTime), sc=SCENARIOS.find(s=>s.id===P.scenario);
-  $('totA').innerHTML=fmt(A.total,1)+' <small>ml</small>';
-  $('totB').innerHTML=fmt(B.total,1)+' <small>ml</small>';
+  $('totA').innerHTML=fmtVol(A.total);
+  $('totB').innerHTML=fmtVol(B.total);
   $('rateNow').textContent=fmt(A.rate,1)+' + '+fmt(B.rate,1)+' ml/h';
   $('clockHud').textContent=$('clockBar').textContent=fmtClock();
   $('m_tOut').innerHTML=fmt(env.tOut,1)+' <small>°C</small>';
@@ -1550,35 +1875,53 @@ function updateUI(dtr){
   $('m_rate').innerHTML=fmt(A.rate,2)+' <small>ml/h</small>';
   $('m_daily').innerHTML=fmt(A.rate*SOL,0)+' <small>ml/sol</small>';
   $('m_gut').innerHTML=fmt(A.gutter,2)+' <small>ml</small>';
-  $('m_tot').innerHTML=fmt(A.total,1)+' <small>ml</small>';
+  $('m_tot').innerHTML=fmtVol(A.total);
   $('m_cop').innerHTML='Pasif <small>ΔT '+fmt(A.dT,0)+' °C</small>';
   $('m_swap').innerHTML=(A.swaps+B.swaps)+' <small>kez (dış '+A.swaps+' / iç '+B.swaps+')</small>';
   $('m_drill').innerHTML=fmt(A.drillWh+B.drillWh,0)+' <small>Wh</small>';
   $('m_eff').innerHTML=(A.kwh>0.001?fmt(A.total/A.kwh,1)+' <small>ml/kWh</small>':'atık ısı <small>(0 W)</small>');
   setBadge('statusA',A,'Dış Ünite'); setBadge('statusB',B,'İç Ünite');
   narrate();
-  // karşılaştırma tablosu
-  const rows=[
-    ['Soğutma','Pasif — Mars atmosferi','Aktif — Peltier + fan'],
-    ['Isı kaynağı','Geri kazanılan atık ısı','Elektrikli ısıtıcı'],
-    ['İç sıcaklık',fmt(A.tAir,1)+' °C',fmt(B.tAir,1)+' °C'],
-    ['Bağıl nem','%'+fmt(A.rh,0),'%'+fmt(B.rh,0)],
-    ['Levha sıcaklığı',fmt(A.tPlate,1)+' °C',fmt(B.tPlate,1)+' °C'],
-    ['Çiy noktası',fmt(A.td,1)+' °C',fmt(B.td,1)+' °C'],
-    ['Anlık üretim',fmt(A.rate,2)+' ml/h',fmt(B.rate,2)+' ml/h'],
-    ['Toplam hasat',fmt(A.total,1)+' ml',fmt(B.total,1)+' ml'],
-    ['Enerji verimi',(A.kwh>0.001?fmt(A.total/A.kwh,1)+' ml/kWh':'atık ısı (0 W)'),(B.kwh>0.001?fmt(B.total/B.kwh,1)+' ml/kWh':'0')],
-  ];
-  $('cmpBody').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+  const waterYield=REGOLITH_BATCH_G*P.soil/100;
+  $('sondajCalc').innerHTML=`⛏ <b>Neden sondaj?</b> ${fmt(REGOLITH_BATCH_G,0)} g regolit × %${fmt(P.soil,1)} nem ≈ <b>${fmt(waterYield,0)} g su</b>. Daha yüksek nem içeren yeni regolit sisteme beslenir.`;
+  // İç / Dış ikiz kartlar
+  const effA = A.kwh>0.001 ? fmt(A.total/A.kwh,1)+' ml/kWh' : 'atık ısı';
+  const effB = B.kwh>0.001 ? fmt(B.total/B.kwh,1)+' ml/kWh' : '–';
+  $('tw_A_rate').textContent=fmt(A.rate,2)+' ml/h';
+  $('tw_A_tot').textContent=fmtVol(A.total);
+  $('tw_A_eff').textContent=effA;
+  $('tw_B_rate').textContent=fmt(B.rate,2)+' ml/h';
+  $('tw_B_tot').textContent=fmtVol(B.total);
+  $('tw_B_eff').textContent=effB;
+  $('tw_sum').textContent=fmtVol(A.total+B.total);
+
+  // üst kahraman şeridi — 5 saniyede özet
+  $('hTotal').textContent=fmtVol(A.total+B.total);
+  $('hTotalSub').textContent='İç '+fmtVol(B.total)+' · Dış '+fmtVol(A.total);
+  $('hEff').textContent=(B.kwh>0.001?fmt(B.total/B.kwh,1)+' ml/kWh':'–');
+  $('hClock').textContent=fmtClock();
+  const sysEl=$('hSys');
+  $('hSysV').textContent=playing?'Çalışıyor':'Duraklatıldı';
+  sysEl.classList.toggle('stop',!playing);
+
   // yıllık tahmin (ORTALAMA hıza göre)
-  const n=DEV[devSel];
-  const avgA=simTime>0.1?A.total/simTime:0, avgB=simTime>0.1?B.total/simTime:0;  // ml/h
+  const n=devCount;
+  const avgA=simTime>0.1?A.total/simTime:0, avgB=simTime>0.1?B.total/simTime:0;  // ml/h (tek cihaz)
   const yA=avgA*8760/1000*n, yB=avgB*8760/1000*n;
   $('annA').textContent=fmt(yA,yA<10?1:0)+' L/yıl'; $('annB').textContent=fmt(yB,yB<10?1:0)+' L/yıl';
   $('barA').style.width=clamp(yA/NEED_Y*100,0,100)+'%';
   $('barB').style.width=clamp(yB/NEED_Y*100,0,100)+'%';
   $('annAp').textContent='ihtiyacın %'+fmt(clamp(yA/NEED_Y*100,0,9999),1)+'\u0131';
   $('annBp').textContent='ihtiyacın %'+fmt(clamp(yB/NEED_Y*100,0,9999),1)+'\u0131';
+  // 17 · bu ihtiyacı karşılamak için kaç cihaz (ikiz sistem) gerektiği
+  const perDeviceY=(avgA+avgB)*8760/1000;                    // tek cihazın (İç+Dış) yıllık toplam üretimi, L
+  const devNeed=perDeviceY>0.001 ? Math.max(1,Math.ceil(NEED_Y/perDeviceY)) : null;
+  $('devNeed').innerHTML = devNeed
+    ? `📦 <b>Kaç cihaz gerekir?</b> Tek cihaz yılda ≈ ${fmt(perDeviceY,1)} L üretir (İç+Dış). 4 astronotun ${fmt(NEED_Y,0)} L/yıl ihtiyacını karşılamak için ≈ <b>${devNeed.toLocaleString('tr-TR')} cihaz</b> gerekir.`
+    : `📦 Kaç cihaz gerektiğini hesaplamak için simülasyonu biraz çalıştır.`;
+  // 18 · cihaz sayısı arttıkça bakım yükü hafif üstel artar (göreli indeks, tek cihaz = 1.00)
+  const maintIdx=n*(1+0.0004*n);
+  $('maintIdx').innerHTML = `🔧 <b>Bakım yükü indeksi:</b> ×${fmt(maintIdx,2)} <small>(tek cihaza göre; koordinasyon/erişim yükü nedeniyle cihaz sayısıyla hafif üstel artar — göreli bir gösterge, ölçülmüş bir maliyet değildir)</small>`;
   drawChart();
 }
 
@@ -1681,7 +2024,7 @@ function loop(now){
 
 /* ---- başlat ---- */
 syncSliderLabels(); buildScenarios(); resetSim();
-$('v_dev').textContent='10 cihaz';
+$('v_dev').textContent='10 adet';
 resize(); applyCam();
 requestAnimationFrame(loop);
 </script>
